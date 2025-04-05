@@ -1,3 +1,6 @@
+import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+console.log(uuidv4()); // This will log a new UUID each time the page is loaded.
+
 import { initialTodos, validationConfig } from "../utils/constants.js";
 import Todo from "../components/Todo.js";
 
@@ -22,7 +25,7 @@ const generateTodo = (data) => {
   const todoElement = todo.getView();
   return todoElement;
 
-  // to be removed after refactoring
+  // to be removed after refactoring                               //done
   // const todoElement = todoTemplate.content
   //   .querySelector(".todo")
   //   .cloneNode(true);
@@ -73,7 +76,8 @@ addTodoForm.addEventListener("submit", (evt) => {
   const date = new Date(dateInput);
   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
 
-  const values = { name, date };
+  const id = uuidv4(); // Generate a new UUID for the todo (done)
+  const values = { name, date, id };
   const todo = generateTodo(values);
   todosList.append(todo);
   closeModal(addTodoPopup);
