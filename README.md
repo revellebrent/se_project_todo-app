@@ -4,6 +4,14 @@
 
 A todo application that allows users to create, and manage tasks. Application users can add todos, and manage them.
 
+## Screenshots
+
+### Initial View
+
+![Empty Todo List](./screenshots/initialstate.png)
+![ToDos list](./screenshots/addedtodo.png)
+![Unique IDs](./screenshots/uniqueid.png)
+
 ## Functionality
 
 - Create new todo items
