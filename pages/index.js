@@ -65,7 +65,6 @@ addTodoForm.addEventListener("submit", (evt) => {
   todosList.append(todo);
   closeModal(addTodoPopup);
   addTodoForm.reset(); // Reset the form fields after submission
-  newTodoValidator.resetValidation(); // Reset validation state after submission
 });
 
 initialTodos.forEach((item) => {
