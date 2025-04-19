@@ -1,14 +1,27 @@
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
 import { initialTodos, validationConfig } from "../utils/constants.js";
+
 import Todo from "../components/Todo.js";
 import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopup = document.querySelector("#add-todo-popup");
 const addTodoForm = document.forms["add-todo-form"];
 const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
 const todosList = document.querySelector(".todos__list");
+
+//
+const section = new Section({
+  items: initialTodos,
+  renderer: (item) => {
+    renderTodo(item);
+  },
+  containerSelector: ".todos__list",
+});
+
+section.renderItems(); // Render the initial todos
 
 const openModal = (modal) => {
   modal.classList.add("popup_visible");
@@ -66,14 +79,14 @@ addTodoForm.addEventListener("submit", (evt) => {
   closeModal(addTodoPopup);
 });
 
-const renderTodo = (item) => {
-  const todo = generateTodo(item);
-  todosList.append(todo);
-};
+// const renderTodo = (item) => {
+//   const todo = generateTodo(item);
+//   todosList.append(todo);
+// };
 
-initialTodos.forEach((item) => {
-  renderTodo(item);
-});
+// initialTodos.forEach((item) => {
+//   renderTodo(item);
+// }); // get rid of these lines when you implement the section class
 
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
 newTodoValidator.enableValidation(); // Enable validation for the form
