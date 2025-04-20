@@ -18,15 +18,15 @@ const addTodoPopup = new PopupWithForm({
   handleFormSubmit: () => {},
 });
 
-const openModal = (modal) => {
-  modal.classList.add("popup_visible");
-  document.addEventListener("keydown", handleEscClose);
-};
+// const openModal = (modal) => {
+//   modal.classList.add("popup_visible");
+//   document.addEventListener("keydown", handleEscClose);
+// };
 
-const closeModal = (modal) => {
-  modal.classList.remove("popup_visible");
-  document.removeEventListener("keydown", handleEscClose);
-};
+// const closeModal = (modal) => {
+//   modal.classList.remove("popup_visible");
+//   document.removeEventListener("keydown", handleEscClose);
+// };
 
 const handleEscClose = (evt) => {
   if (evt.key === "Escape") {
@@ -51,11 +51,11 @@ const generateTodo = (data) => {
 };
 
 addTodoButton.addEventListener("click", () => {
-  openModal(addTodoPopupEl);
+  addTodoPopup.open(); // Open the popup when the button is clicked
 });
 
 addTodoCloseBtn.addEventListener("click", () => {
-  closeModal(addTodoPopupEl);
+  addTodoPopup.close(); // Close the popup when the close button is clicked
 });
 
 addTodoForm.addEventListener("submit", (evt) => {
