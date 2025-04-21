@@ -17,16 +17,16 @@ const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
   handleFormSubmit: () => {},
 });
+addTodoPopup.setEventListeners(); // Set event listeners for the popup
 
 // const openModal = (modal) => {
 //   modal.classList.add("popup_visible");
 //   document.addEventListener("keydown", handleEscClose);
 // };
 
-// const closeModal = (modal) => {
-//   modal.classList.remove("popup_visible");
-//   document.removeEventListener("keydown", handleEscClose);
-// };
+const closeModal = (modal) => {
+  modal.classList.remove("popup_visible");
+};
 
 const handleEscClose = (evt) => {
   if (evt.key === "Escape") {
@@ -54,9 +54,9 @@ addTodoButton.addEventListener("click", () => {
   addTodoPopup.open(); // Open the popup when the button is clicked
 });
 
-addTodoCloseBtn.addEventListener("click", () => {
-  addTodoPopup.close(); // Close the popup when the close button is clicked
-});
+// addTodoCloseBtn.addEventListener("click", () => {
+//   addTodoPopup.close(); // Close the popup when the close button is clicked
+// });
 
 addTodoForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -72,7 +72,7 @@ addTodoForm.addEventListener("submit", (evt) => {
   const todoElement = generateTodo(values); // Create a new todo element (done)
   section.addItem(todoElement); // Add the new todo to the section (done)
   newTodoValidator.resetValidation();
-  closeModal(addTodoPopupEl);
+  addTodoPopup.close(); // Close the popup (done)
 });
 
 const section = new Section({

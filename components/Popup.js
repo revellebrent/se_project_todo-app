@@ -1,7 +1,7 @@
 class Popup {
   constructor({ popupSelector }) {
     this._popupElement = document.querySelector(popupSelector);
-    console.log(this._popupElement);
+    this._popupCloseBtn = this._popupElement.querySelector(".popup__close");
   }
 
   open() {
@@ -9,6 +9,12 @@ class Popup {
   }
   close() {
     this._popupElement.classList.remove("popup_visible");
+  }
+
+  setEventListeners() {
+    this._popupCloseBtn.addEventListener("click", () => {
+      this.close(); // Close the popup when the close button is clicked
+    });
   }
 }
 
