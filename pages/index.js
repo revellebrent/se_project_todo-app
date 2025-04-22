@@ -28,20 +28,20 @@ const closeModal = (modal) => {
   modal.classList.remove("popup_visible");
 };
 
-const handleEscClose = (evt) => {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_visible");
-    if (!openedPopup) return;
-    closeModal(openedPopup);
-  }
-};
+// const handleEscClose = (evt) => {
+//   if (evt.key === "Escape") {
+//     const openedPopup = document.querySelector(".popup_visible");
+//     if (!openedPopup) return;
+//     closeModal(openedPopup);
+//   }
+// };
 
-const handleOverlayClose = (evt) => {
-  if (evt.target.classList.contains("popup_visible")) {
-    closeModal(evt.target);
-  }
-};
-addTodoPopupEl.addEventListener("click", handleOverlayClose);
+// const handleOverlayClose = (evt) => {
+//   if (evt.target.classList.contains("popup_visible")) {
+//     closeModal(evt.target);
+//   }
+// };
+// addTodoPopupEl.addEventListener("click", handleOverlayClose);
 
 // The logic in this function should all be handled in the Todo class.
 const generateTodo = (data) => {
