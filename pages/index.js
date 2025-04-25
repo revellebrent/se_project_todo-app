@@ -6,12 +6,15 @@ import Todo from "../components/Todo.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import TodoCounter from "../components/TodoCounter.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopupEl = document.querySelector("#add-todo-popup");
 const addTodoForm = document.forms["add-todo-form"];
 const addTodoCloseBtn = addTodoPopupEl.querySelector(".popup__close");
 const todosList = document.querySelector(".todos__list");
+
+const todoCounter = new TodoCounter(initialTodos, ".counter__text"); // Initialize the TodoCounter with the selector for the counter text element
 
 const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
@@ -33,33 +36,12 @@ const addTodoPopup = new PopupWithForm({
 });
 addTodoPopup.setEventListeners(); // Set event listeners for the popup
 
-// const openModal = (modal) => {
-//   modal.classList.add("popup_visible");
-//   document.addEventListener("keydown", handleEscClose);
-// };
+function handleCheckboxChange(completed) {
+  todoCounter.updateCompleted(completed);
+}
 
-// const closeModal = (modal) => {
-//   modal.classList.remove("popup_visible");    ??????????????????
-// };
-
-// const handleEscClose = (evt) => {
-//   if (evt.key === "Escape") {
-//     const openedPopup = document.querySelector(".popup_visible");
-//     if (!openedPopup) return;
-//     closeModal(openedPopup);
-//   }
-// };
-
-// const handleOverlayClose = (evt) => {
-//   if (evt.target.classList.contains("popup_visible")) {
-//     closeModal(evt.target);
-//   }
-// };
-// addTodoPopupEl.addEventListener("click", handleOverlayClose);
-
-// The logic in this function should all be handled in the Todo class.
 const generateTodo = (data) => {
-  const todo = new Todo(data, "#todo-template");
+  const todo = new Todo(data, "#todo-template", handleCheckboxChange); // Pass the handleCheckboxChange function to the Todo class
   const todoElement = todo.getView();
   return todoElement;
 };
