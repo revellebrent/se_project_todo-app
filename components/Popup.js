@@ -2,22 +2,23 @@ class Popup {
   constructor({ popupSelector }) {
     this._popupElement = document.querySelector(popupSelector);
     this._popupCloseBtn = this._popupElement.querySelector(".popup__close");
+    this._handleEscapeClose = this._handleEscapeClose.bind(this); // Bind to the class instance
   }
 
   _handleEscapeClose(evt) {
     if (evt.key === "Escape") {
-      console.log("Escape key pressed");
+      this.close();
     }
   }
 
   open() {
     this._popupElement.classList.add("popup_visible");
-    document.addEventListener("keyup", this._handleEscapeClose); // Add the event listener when the popup is opened
+    document.addEventListener("keyup", this._handleEscapeClose);
   }
 
   close() {
     this._popupElement.classList.remove("popup_visible");
-    document.removeEventListener("keyup", this._handleEscapeClose); // Remove the event listener when the popup is closed}
+    document.removeEventListener("keyup", this._handleEscapeClose);
   }
 
   setEventListeners() {

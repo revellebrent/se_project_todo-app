@@ -15,7 +15,21 @@ const todosList = document.querySelector(".todos__list");
 
 const addTodoPopup = new PopupWithForm({
   popupSelector: "#add-todo-popup",
-  handleFormSubmit: () => {},
+  handleFormSubmit: (inputValues) => {
+    const name = inputValues.name;
+    const dateInput = inputValues.date;
+
+    // Central Standard Time - adjusted -6 hours
+    const date = new Date(dateInput);
+    date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+
+    const id = uuidv4(); // Generate a new UUID for the todo (done)
+    const values = { name, date, id };
+    const todoElement = generateTodo(values); // Create a new todo element (done)
+    section.addItem(todoElement); // Add the new todo to the section (done)
+    newTodoValidator.resetValidation();
+    addTodoPopup.close();
+  },
 });
 addTodoPopup.setEventListeners(); // Set event listeners for the popup
 
@@ -24,9 +38,9 @@ addTodoPopup.setEventListeners(); // Set event listeners for the popup
 //   document.addEventListener("keydown", handleEscClose);
 // };
 
-const closeModal = (modal) => {
-  modal.classList.remove("popup_visible");
-};
+// const closeModal = (modal) => {
+//   modal.classList.remove("popup_visible");    ??????????????????
+// };
 
 // const handleEscClose = (evt) => {
 //   if (evt.key === "Escape") {
@@ -58,22 +72,22 @@ addTodoButton.addEventListener("click", () => {
 //   addTodoPopup.close(); // Close the popup when the close button is clicked
 // });
 
-addTodoForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  const name = evt.target.name.value;
-  const dateInput = evt.target.date.value;
+// addTodoForm.addEventListener("submit", (evt) => {
+//   evt.preventDefault();
+//   const name = evt.target.name.value;
+//   const dateInput = evt.target.date.value;
 
-  // Central Standard Time - adjusted -6 hours
-  const date = new Date(dateInput);
-  date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+//   // Central Standard Time - adjusted -6 hours
+//   const date = new Date(dateInput);
+//   date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
 
-  const id = uuidv4(); // Generate a new UUID for the todo (done)
-  const values = { name, date, id };
-  const todoElement = generateTodo(values); // Create a new todo element (done)
-  section.addItem(todoElement); // Add the new todo to the section (done)
-  newTodoValidator.resetValidation();
-  addTodoPopup.close(); // Close the popup (done)
-});
+//   const id = uuidv4(); // Generate a new UUID for the todo (done)
+//   const values = { name, date, id };
+//   const todoElement = generateTodo(values); // Create a new todo element (done)
+//   section.addItem(todoElement); // Add the new todo to the section (done)
+//   newTodoValidator.resetValidation();
+//   addTodoPopup.close(); // Close the popup (done)
+// });
 
 const section = new Section({
   items: initialTodos,
