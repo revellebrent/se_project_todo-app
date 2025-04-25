@@ -1,17 +1,19 @@
 class Todo {
-  constructor(data, selector, handleCheckboxChange) {
+  constructor(data, selector, handleCheckboxChange, handleDelete) {
     this._data = data;
     this._templateElement = document.querySelector(selector);
-    this._handleCheckboxChange = handleCheckboxChange; // Function to handle checkbox change
+    this._handleCheckboxChange = handleCheckboxChange;
+    this._handleDelete = handleDelete;
   }
 
   _setEventListeners() {
     this._todoCheckboxEl.addEventListener("change", () => {
       this._data.completed = !this._data.completed;
-      this._handleCheckboxChange(this._data.completed); // Call the function to handle checkbox change
+      this._handleCheckboxChange(this._data.completed);
     });
 
     this._todoDeleteBtn.addEventListener("click", () => {
+      this._handleDelete(this._data.completed);
       this._todoElement.remove();
     });
   }
@@ -26,8 +28,8 @@ class Todo {
   }
 
   getView() {
-    this._todoElement = this._templateElement.content // this. instead of const makes it able to use outside the function
-      .querySelector(".todo") //pass config object to the constructor
+    this._todoElement = this._templateElement.content
+      .querySelector(".todo")
       .cloneNode(true);
 
     const todoNameEl = this._todoElement.querySelector(".todo__name");
