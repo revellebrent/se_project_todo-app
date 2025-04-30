@@ -4,12 +4,11 @@ class PopupWithForm extends Popup {
   constructor({ popupSelector, handleFormSubmit }) {
     super({ popupSelector }); // Call the parent class constructor
     this._popupForm = this._popupElement.querySelector(".popup__form"); // Select the form element within the popup
+    this._inputList = this._popupForm.querySelectorAll(".popup__input"); // Select all input elements within the form
     this._handleFormSubmit = handleFormSubmit; // Store the form submit handler
   }
 
   _getInputValues() {
-    this._inputList = this._popupForm.querySelectorAll(".popup__input");
-
     const inputValues = {}; // Initialize an empty object to store input values
     this._inputList.forEach((input) => {
       inputValues[input.name] = input.value; // Store each input value in the object using its name as the key
